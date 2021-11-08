@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand"><h4 class="white">Player Management</h4></a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"><%= link_to "Back", teams_path, class: "white btn btn-secondary" %><br></span>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "white btn btn-secondary" %> <br></span>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar" ><%= link_to "Buy new Player", players_path, class: "white btn btn-secondary" %><br> <br></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="card-header text-center">
+  <h1> <%= current_user.name %> Player</h1>
+</div>
+<% if current_user.players.present? %>
+  <% current_user.players.each do |player| %>
+    <div class="card  text-black bg-light">
+      <%= avatar_for_player(player) %>
+      <ul class="large-block-grid-2 medium-block-grid-1 u-hide-tablet team-page-header__details">
+        <li>
+          <h4>Player Name:-
+          <strong><%= player.name%></strong></h4>
+        </li>
+        <li>
+          <h4>Player Salary:-
+          <strong><%= player.player_salary(current_user.id) %></strong></h4>
+        </li>
+      </ul>
+        <button type="button"><%= link_to "Edit Salary", edit_team_player_path(player.team_player(current_user.id)),class: "btn btn-primary" %>
+       <%= link_to 'Remove player',player.team_player(current_user.id),class: "btn btn-primary" , method: :delete, data: {confirm: 'Are You sure?'} %>
+     </button>
+    </div>
+  <% end %>
+<% else %>
+  <div class="card-header text-center">
+    <h2> Currently you not Baught Any Player  </h2>
+  </div>
+<% end %>

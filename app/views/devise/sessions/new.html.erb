@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <a class="navbar-brand">Player Management</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  </div>
+</nav>
+<div class="card text-center bg-dark text-white">
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <h3><%= f.label :email %>:-</h3>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+    <div class="form-group">
+      <h3><%= f.label :password %>:-</h3>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+    <% if devise_mapping.rememberable? %>
+      <div class="checkbox">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+    <div class="btn">
+      <%= f.submit "Log in", class: "btn-primary"%>
+    </div>
+  <% end %>
+  <div class="auth-links">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

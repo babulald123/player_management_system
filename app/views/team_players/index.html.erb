@@ -1,0 +1,18 @@
+<h2><%= current_user.name %></h2>
+
+
+
+
+<div class="actions">
+  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+</div>
+
+
+<%= @teamplayers.each do |tp| %>
+  <%= tp.id %>
+  <%= tp.name %>
+  <%= tp.salary %>
+  <%= tp.team_id %>
+<%end%>
+  
+   

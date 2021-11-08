@@ -1,0 +1,52 @@
+<!-- Player profile -->
+
+<% unless current_user.blank? %>
+<% end %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand"><h3 class="white">Player Management</a></h3>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <%= link_to "Edit Profile", edit_player_path(@player), class: "white btn btn-secondary" %><br>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "white btn btn-secondary" %> <br>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container card">
+  <div class="row">
+      <%= avatar_for_player(@player) %>
+    <div class="col-sm">
+      <%= current_user.body %>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <h2><%= current_user.email %></h2>
+  <% unless @player.teams.empty? %>
+    <div class="card-header bg-dark text-white text-center">
+      <h1><%= current_user.name %> Playing For Teams</h1>
+    </div>
+    <div>
+      <% @player.teams.each do |team| %>
+        <div class="card text-center text-white bg-secondary">
+          <%= avatar_for_team(team) %>
+          <h3>Team name=> <%= team.name %><br></h3>
+          <h3>Player Salary=> <%= @player.player_salary(team) %></h3>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <h4 class="card"><%= current_user.body %></h4>
+    <div class="card-header bg-dark text-white text-center">
+      <h1><%= current_user.name %> Not Playing For Any Teams</h1>
+    </div>
+  <% end %>
+</div>  

@@ -1,0 +1,33 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  port: 5432
+
+development:
+  <<: *default
+  database: 'player_management_dev'
+  username: 'postgres'
+  password: 'postgres'
+  host: 'localhost'
+  port: 5432
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: 'player_management_test'
+  username: 'postgres'
+  password: 'postgres'
+  host: 'localhost'
+  port: 5432
+
+production:
+  <<: *default
+  database: ''
+  username:
+  password:
+  host: 'localhost'
+  port: 5432

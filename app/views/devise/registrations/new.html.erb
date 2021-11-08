@@ -1,0 +1,46 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <a class="navbar-brand">Player Management</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  </div>
+</nav>
+<div class="card text-center bg-dark text-white">
+  <h2 class="form-signin-heading">Please sign up</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="form-group">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="form-group">
+          Select Type -
+          <%= f.radio_button :type, 'Team' %> Team
+          <%= f.radio_button :type, 'Player', checked: true %>Player <br />
+          <%= f.hidden_field :amount, value: 80000 %><br />
+        </div>
+        <div class="form-group">
+          <%= f.submit "Sign up", class: "btn-info" %>
+        </div>
+      <% end %>
+      <div class="auth-links">
+        Already a user? <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+

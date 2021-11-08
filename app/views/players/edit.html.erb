@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand"><h3 class="white">Player Management</a></h3>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"><%= link_to "Edit Profile", edit_player_path(@player), class: "white btn btn-secondary" %><br></span>
+        </button>
+      </li>
+       <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"><%= link_to "Back", player_path, class: "white btn btn-secondary" %><br></span>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "white btn btn-secondary" %> <br></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="card text-center">
+  <div class="card-header">
+    <h1> Edit Profile </h1>
+    <%= form_for(current_user, html: { multipart: true }) do |f| %>
+      <div class="form-group">
+        <h4><%= f.label :name %>:-
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" %></h4>
+      </div>
+      <div class="form-group">
+        <h4><%= f.label :body %>:-
+        <%= f.text_field :body %></h4>
+      </div>
+      <div class="form-group button">
+        <%= f.file_field :avatar, id: "avatar-image"  %>
+        <%= f.hidden_field :avatar_cache %><br /></span>
+      </div>
+      <div class="form-group">
+        <%= f.submit "update profile", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

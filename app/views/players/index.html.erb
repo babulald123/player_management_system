@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand"><h4 class="white">Player Management</h4></a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"><%= link_to "Back", :back, class: "white btn btn-secondary" %><br></span>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "white btn btn-secondary" %> <br></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="card text-center">
+  <div class="card-header">
+    <h1><%= current_user.name %></h1>
+  </div>
+</div>
+<div class="card ">
+  <% @players.each do |player| %>
+    <%= avatar_for_player(player) %>
+  	<h2><%= player.name %></h2>
+    <% unless player.teams.exists?(current_user.id) %>
+		<button type="button">
+      <%= link_to 'Buy', new_team_player_path(player_id: player.id), class: "btn btn-primary"%>
+    </button><br>
+    <% else %>
+      <button type="button">
+        <h3 class="btn btn-secondary"> Already Bought</h3>
+      </button>
+    <% end %>
+  <% end %>
+</div>
+
+
+<ul class="large-block-grid-2 medium-block-grid-1 u-hide-tablet team-page-header__details">
+  <li>
+    "Name"
+    <strong>Rohit Sharma</strong>
+  </li>

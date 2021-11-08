@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand"><h4 class="white">Player Management</h4></a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item button">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"><%= link_to "Back", teams_path, class: "white btn btn-secondary" %><br></span>
+        </button>
+      </li>
+      <li class="nav-item active button" >
+        <button type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "white btn btn-secondary" %> <br></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h2 class="text-center">Edit Player Salary</h2>
+<div class="card text-center bg-dark text-white">
+<%= form_for @team_player, data: { form_validation_target: "form" } do |form| %>
+  <% if @team_player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team_player.errors.count, "error") %> prohibited this team_player from being saved:</h2>
+      <% @team_player.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <h3><%= form.label :player_salary, required: true %></h3>
+    <%= form.number_field :player_salary, required: true  %>
+    <%= form.hidden_field :player_id, required: true  %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit class: "btn btn-info" %>
+  </div>
+<% end %>
